@@ -145,7 +145,76 @@ select UF, livro, valor from livros where UF ='SP';
 /* Trazer os dados dos autores do sexo masculino que tiveram livrso publicados por SP ou RJ */
 select autor, sexo, uf 
 from livros 
-where sexo = 'M' and UF = 'SP'and UF = 'RJ';
+where sexo = 'M' and (UF = 'SP'or UF = 'RJ');
+
+select autor, sexo, uf 
+from livros 
+where sexo = 'M' and UF = 'SP'and paginas > 100;
+
+/* Operadores Lógicos
+OR  -> Para que a  saída da query seja verdadeira, basta que apenas uma condição seja verdadeira.
+AND -> Para que a saída seja verdadeira, todas as condições têm que ser verdadeiras.
+*/
+
+/* OR - OR */
+
+show databases;
+use projeto;
+select * from cliente
+
+select nome, sexo, endereco from cliente
+where sexo = 'M'or endereco like '%RJ';
+
+select nome, sexo, endereco from cliente
+where sexo = 'F'or endereco like '%ESTACIO';
+
+/* AND - E */
+
+select nome, sexo, endereco from cliente
+where sexo = 'M'and endereco like '%RJ';
+
+select nome, sexo, endereco from cliente
+where sexo = 'F' and endereco like '%ESTACIO';
+
+
+/* Funções de agregações -> COUNT(*), GROUP BY, performance com operadores lógicos */
+
+/* Contando os registros de uma tabela */
+select count(*) from cliente;
+select count(*) as 'Registros' from cliente;
+
+/* Operador GROUP BY */
+select sexo, count(*) from cliente
+group by sexo;
+ 
+/* Performance em operadores lógicos */
+
+/* 1 milhão de registros */
+
+-- Para contar 
+select count(*) from cliente;
+select sexo, count(*) from cliente group by sexo;
+select cidade, count(*) from cliet=nte group by cidade;
+
+-- Condição: 
+-- Sexo: 'F'
+-- Cidade = 'Rio de Janeiro'
+
+-- Tratando com OR (70% mulheres -> Sexo F, 30% mora no RJ)
+select nome, sexo, endereco from cliente
+where sexo = 'F'
+OR cidade = 'Rio de Janeiro';
+
+-- Tratando com AND (70% mulheres -> Sexo F, 30% mora no RJ)
+select nome, sexo, endereco from cliente
+where cidade = 'Rio de Janeiro'
+and sexo = 'F';
+
+
+
+
+
+
 
 
 
