@@ -210,6 +210,74 @@ select nome, sexo, endereco from cliente
 where cidade = 'Rio de Janeiro'
 and sexo = 'F';
 
+/* Filtrando valores nulos */
+
+select nome, sexo, endereco 
+from cliente
+where email is null;
+
+select nome, sexo, endereco 
+from cliente
+where email is not null;
+
+/* IS OU IS NOT NULL */
+
+/* Utilizando o UPDATE para atualizar  valores */
+
+select nome , email from cliente;
+
+update cliente set email = 'lilian@hotmail.com';
+-- cuidado com o comando anterior!!
+
+select * from cliente
+where nome = 'JOÃO';
+
+update cliente 
+set email = 'joao@ig.com.br'
+where nome = 'joão';
+
+update cliente 
+set email = 'jorge@ig.com.br'
+where nome = 'JORGE';
+
+update cliente 
+set email = 'celia@hotmail.com'
+where nome = 'CELIA';
+
+update cliente 
+set email = 'ana@gmail.com'
+where nome = 'ANA';
+
+/* Commit e Rollback */
+/* Deletando registros com a claúsula DELETE */
+
+select count(*) from cliente;
+
+delete from cliente
+where nome = 'ANA';
+
+select count(*) from cliente
+where nome = 'ANA';
+
+insert into cliente values ('CARLA', 'F', 'C.LOPES@UOL.COM.BR', 456266333, '84979996589', 'RUA COPPER LEAF - HAMBURG');
+
+-- Sempre que for deletar, use um select para confirmar o que vai ser 
+-- apagado de fato.
+
+select * from cliente
+where nome = 'CARLA'
+or email = 'LILIAN@HOTMAIL.COM'; -- cuidado com o OR
+
+select * from cliente
+where nome = 'CARLA'
+and email = 'C.LOPES@UOL.COM.BR';
+
+delete from cliente
+where nome = 'CARLA'
+and email = 'C.LOPES@UOL.COM.BR';
+
+
+
 
 
 
