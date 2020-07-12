@@ -276,7 +276,7 @@ delete from cliente
 where nome = 'CARLA'
 and email = 'C.LOPES@UOL.COM.BR';
 
-/* Primeira forma normal */
+/* Primeira forma normal - 03 regras */
 
 /* 
 
@@ -286,18 +286,31 @@ ex: [amarelo, azul, laranja]
 2 - Todo campo multivalorado se tornará outra tabela quando o campo for divisível.
 
 3 - Toda tabela necessita de pelo menos um campo que identifique todo registro. 
-Obs: Chave Natural x Chave Artificial
+Obs: Chave Natural(muito mais usada) x Chave Artificial
 
 */
 
+/* MODELAGEM 
+
+Estamos no início da modelagem para um sistema e o nosso gestor pediu a modelagem da tabela de clientes com a seguinte regra de negócios:
+
+ENDEREÇO - Obrigatório o cadastro- no máximo 1;
+(1, 1)
+
+TELEFONE - Não é obrigatório, mas caso queira o cliente pode cadastrar mais de um.
+(0, N)
+
+A Cardinalidade é definida pela regra de negócio.
+!! Não somos nós que definimos !!
+
+[(0, N), (0, 1), (1, N), (1, 1)]
+
+O Primeiro elemento de cada parêntesis referencia a obrigatoriedade de inserção do dado na tabela.
+
+O segundo elemento referencia a cardinalidade, ou seja, a quantidade máxima de elementos.
 
 
-
-
-
-
-
-
+*/
 
 
 
