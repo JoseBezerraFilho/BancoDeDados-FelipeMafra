@@ -276,6 +276,20 @@ delete from cliente
 where nome = 'CARLA'
 and email = 'C.LOPES@UOL.COM.BR';
 
+/* Primeira forma normal */
+
+/* 
+
+1 - Todo campo vetorizado se torna outra tabela
+ex: [amarelo, azul, laranja]
+
+2 - Todo campo multivalorado se tornará outra tabela quando o campo for divisível.
+
+3 - Toda tabela necessita de pelo menos um campo que identifique todo registro. 
+Obs: Chave Natural x Chave Artificial
+
+*/
+
 
 
 
