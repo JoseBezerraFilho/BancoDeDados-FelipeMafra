@@ -392,3 +392,93 @@ INSERT INTO ENDERECO VALUES(NULL,'RUA URUGUAIANA','CENTRO','VITORIA','ES',5);
 
 SELECT * FROM  ENDERECO;
 DESC TELEFONE
+
+/* SELEÇÃO, PROJEÇÃO E JUNÇÃO */
+
+/* PROJEÇÃO -> É TUDO QUE VAI SER MOSTRADO NA TELA
+	 ex: Comando SELECT
+
+   SELEÇÃO -> FILTRAR UM SUBCONJUNTO DE UMA TABELA COMPLETA
+	 ex.: Comando WHERE (Claúsula de seleção)
+
+	 SELECT NOME, SEXO, EMAIL -> PROJEÇÃO
+	 FROM CLIENTE -> ORIGEM
+	 WHERE SEXO -> SELECÁO(FILTRO)
+
+	 JUNÇÃO -> JOIN
+	 SELECT NOME, EMAIL, IDCLIENTE
+	 FROM CLIENTE;
+
++--------+----------------+-----------+
+| NOME   | EMAIL          | IDCLIENTE |
++--------+----------------+-----------+
+| JOAO   | JOAOA@IG.COM   |         1 |
+| CARLOS | CARLOSA@IG.COM |         2 |
+| ANA    | ANA@IG.COM     |         3 |
+| CLARA  | NULL           |         4 |
+| JORGE  | JORGE@IG.COM   |         5 |
+| CELIA  | JCELIA@IG.COM  |         6 |
++--------+----------------+-----------+
+6 rows in set (0.00 sec)
+
+SELECT ID_CLIENTE, BAIRRO, CIDADE
+FROM ENDERECO;
+	
++------------+----------+----------------+
+| ID_CLIENTE | BAIRRO   | CIDADE         |
++------------+----------+----------------+
+|          4 | CENTRO   | B. HORIZONTE   |
+|          1 | CENTRO   | RIO DE JANEIRO |
+|          3 | JARDINS  | SAO PAULO      |
+|          2 | ESTACIO  | RIO DE JANEIRO |
+|          6 | FLAMENGO | RIO DE JANEIRO |
+|          5 | CENTRO   | VITORIA        |
++------------+----------+----------------+
+6 rows in set (0.00 sec)
+
+SELECT NOME, SEXO, BAIRRO, CIDADE -> PROJECÁO
+FROM CLIENTE, ENDERECO -> ORIGEM
+WHERE IDCLIENTE = ID_CLIENTE; -> JUNÇAO(NÃO RECOMENDADO */
+
+SELECT NOME, SEXO, BAIRRO, CIDADE
+FROM CLIENTE
+INNER JOIN ENDERECO
+ON IDCLIENTE = ID_CLIENTE
+WHERE SEXO = 'F';
+
+SELECT NOME, SEXO, EMAIL, TIPO, NUMERO
+FROM CLIENTE
+INNER JOIN TELEFONE
+ON IDCLIENTE = ID_CLIENTE;
+
+/* NOME, SEXO, BAIRRO, CIDADE, TIPO, NUMERO */
+
+SELECT CLIENTE.NOME, CLIENTE.SEXO, ENDERECO.BAIRRO, ENDERECO.CIDADE, TELEFONE.TIPO, TELEFONE.NUMERO
+FROM CLIENTE
+INNER JOIN ENDERECO
+ON CLIENTE.IDCLIENTE = ENDERECO.ID_CLIENTE
+INNER JOIN TELEFONE
+ON CLIENTE.IDCLIENTE = TELEFONE.ID_CLIENTE;
+
++--------+------+---------+----------------+------+----------+
+| NOME   | SEXO | BAIRRO  | CIDADE         | TIPO | NUMERO   |
++--------+------+---------+----------------+------+----------+
+| JOAO   | M    | CENTRO  | RIO DE JANEIRO | CEL  | 87866896 |
+| JOAO   | M    | CENTRO  | RIO DE JANEIRO | RES  | 99667587 |
+| JOAO   | M    | CENTRO  | RIO DE JANEIRO | COM  | 66687899 |
+| CARLOS | M    | ESTACIO | RIO DE JANEIRO | COM  | 54768899 |
+| CARLOS | M    | ESTACIO | RIO DE JANEIRO | CEL  | 88687909 |
+| ANA    | F    | JARDINS | SAO PAULO      | CEL  | 78989765 |
+| ANA    | F    | JARDINS | SAO PAULO      | CEL  | 99766676 |
+| JORGE  | M    | CENTRO  | VITORIA        | CEL  | 78458743 |
+| JORGE  | M    | CENTRO  | VITORIA        | RES  | 56576876 |
+| JORGE  | M    | CENTRO  | VITORIA        | RES  | 89986668 |
++--------+------+---------+----------------+------+----------+
+10 rows in set (0.00 sec)
+
+SELECT C.NOME, C.SEXO, E.BAIRRO, E.CIDADE, T.TIPO, T.NUMERO
+FROM CLIENTE C
+INNER JOIN ENDERECO E
+ON C.IDCLIENTE = E.ID_CLIENTE
+INNER JOIN TELEFONE T
+ON C.IDCLIENTE = T.ID_CLIENTE;
