@@ -482,3 +482,116 @@ INNER JOIN ENDERECO E
 ON C.IDCLIENTE = E.ID_CLIENTE
 INNER JOIN TELEFONE T
 ON C.IDCLIENTE = T.ID_CLIENTE;
+
+/* 
+	DML - DATA MANIPULATION LANGUAGE
+	DDL - DATA DEFINITION LANGUAGE
+	DCL - DATA CONTROL LANGUAGE
+	TCT - TRANSACTION CONTROL LANGUAGE
+
+*/
+
+/* INSERT  - (DML) */
+
+insert into cliente values (null, 'Paula', 'M', NULL, '77437493')
+insert into endereco values (null, 'Rua Joaquim Silva', 'Alvorada', 'Niterói', 'RJ', 7 )
+
+/* Filtros */
+
+select * from cliente
+where sexo = 'M';
+
+/* UPDATE
+
+Sempre pesquise antes o registro a ser alterado.
+*/
+
+select * from cliente
+where idcliente = 7;
+
+update cliente
+set sexo = 'F'
+where idcliente = 7;
+
+/* DELETE */
+
+insert into cliente values (null, 'xxx', 'm', null, 'xxx');
+
+select * from cliente;
+
+select * from cliente 
+where idcliente = 8;
+
+delete from cliente 
+where idcliente = 8;
+
+/* DATA DEFINITION LANGUAGE - DDL 
+	 OBS: Tipagem do dado
+*/
+
+CREATE TABLE PRODUTO (
+	IDPRODUTO INT PRIMARY KEY AUTO_INCREMENT,
+	NOME_PRODUTO VARCHAR(30) NOT NULL,
+	PRECO INT,
+	FRETE FLOAT(10,2) NOT NULL );
+
+
+/* ALTER TABLE */
+
+/* ALTERANDO O NOME DE UMA COLUNA - CHANGE, MODIFY */
+
+ALTER TABLE PRODUTO
+CHANGE PRECO VALOR_UNITARIO INT NOT NULL;
+
+DESC PRODUTO;
+
++----------------+-------------+------+-----+---------+----------------+
+| Field          | Type        | Null | Key | Default | Extra          |
++----------------+-------------+------+-----+---------+----------------+
+| IDPRODUTO      | int         | NO   | PRI | NULL    | auto_increment |
+| NOME_PRODUTO   | varchar(30) | NO   |     | NULL    |                |
+| VALOR_UNITARIO | int         | NO   |     | NULL    |                |
+| FRETE          | float(10,2) | NO   |     | NULL    |                |
++----------------+-------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+ALTER TABLE PRODUTO
+CHANGE VALOR_UNITARIO VALOR_UNITARIO INT;
+
++----------------+-------------+------+-----+---------+----------------+
+| Field          | Type        | Null | Key | Default | Extra          |
++----------------+-------------+------+-----+---------+----------------+
+| IDPRODUTO      | int         | NO   | PRI | NULL    | auto_increment |
+| NOME_PRODUTO   | varchar(30) | NO   |     | NULL    |                |
+| VALOR_UNITARIO | int         | YES  |     | NULL    |                |
+| FRETE          | float(10,2) | NO   |     | NULL    |                |
++----------------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+
+/* MODIFY - ALTERAR O TIPO */
+ALTER TABLE PRODUTO
+MODIFY VALOR_UNITARIO VARCHAR(50) NOT NULL;
+
+/* ADICIONANDO COLUNAS */
+
+ALTER TABLE PRODUTO
+ADD PESO FLOAT(10,2) NOT NULL;
+
+/* APAGANDO UMA COLUNA */
+
+ALTER TABLE PRODUTO
+DROP COLUMN PESO;
+
+/* ADICIONANDO COLUNA EM ORDEM ESPECÍFICA */
+
+ALTER TABLE PRODUTO
+ADD COLUMN PESO FLOAT(10,2) NOT NULL
+AFTER NOME_PRODUTO;
+
+ALTER TABLE PRODUTO
+DROP COLUMN PESO;
+
+ALTER TABLE PRODUTO
+ADD COLUMN PESO FLOAT(10,2) NOT NULL
+FIRST;
